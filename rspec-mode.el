@@ -471,6 +471,7 @@
 
 ;; Utility function to add hooks to multiple modes
 
+
 ;;;###autoload
 (defun add-to-multiple-hooks (function1 function2 hooks)
   (mapc (lambda (hook)
@@ -479,11 +480,10 @@
 	    (add-hook hook function2)))
         hooks))
 
-;;;###autoload
-(add-to-multiple-hooks 'rspec-verifiable-mode 'rspec-mode
-		       '(ruby-mode-hook
-			 enh-ruby-mode-hook
-			 rails-minor-mode-hook))
+(eval-after-load 'rspec-mode '(add-to-multiple-hooks 'rspec-verifiable-mode 'rspec-mode
+						     '(ruby-mode-hook
+						       enh-ruby-mode-hook
+						       rails-minor-mode-hook)))
 
 ;; abbrev
 ;; from http://www.opensource.apple.com/darwinsource/Current/emacs-59/emacs/lisp/derived.el
